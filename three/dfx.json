@@ -5,6 +5,10 @@
     "three": {
       "type": "motoko",
       "main": "src/three/main.mo"
+    },
+    "three06": {
+      "type": "motoko",
+      "main": "src/three/main06.mo"
     }
   },
   "defaults": {
