@@ -8,7 +8,7 @@
 -----
 
 第六问：
-![](./6.PNG)
+![](./6.png)
 
 主网地址：https://43sgg-6yaaa-aaaah-aa6sa-cai.raw.ic0.app/
 
