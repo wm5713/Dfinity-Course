@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "dfx": "0.8.4",
+  "canisters": {
+    "four": {
+      "type": "motoko",
+      "main": "src/four/main.mo"
+    },
+    "four2": {
+      "type": "motoko",
+      "main": "src/four/main.mo"
+    }
+  },
+  
+  "defaults": {
+    "build": {
+      "packtool": "",
+      "args": ""
+    }
+  },
+  "networks": {
+    "local": {
+      "bind": "127.0.0.1:8000",
+      "type": "ephemeral"
+    }
+  }
+}
