@@ -8,7 +8,7 @@
     },
     "four2": {
       "type": "motoko",
-      "main": "src/four/main.mo"
+      "main": "src/four/main2.mo"
     }
   },
   
