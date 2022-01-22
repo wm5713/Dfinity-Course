@@ -1,19 +1,33 @@
 import { five } from "../../declarations/five";
 
-document.querySelector("form").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const button = e.target.querySelector("button");
+async function post() {
+  let post_button = document.getElementById("post");
+  post_button.disabled = true;
+  let textarea = document.getElementById("message");
+  let text = textarea.value;
+  await five.post(text);
+  post_button.disabled = false;
+  
+}
 
-  const name = document.getElementById("name").value.toString();
+var num_posts = 0;
+async function load_posts() {
+  let posts_section = document.getElementById("posts");
+  let posts = await five.posts();
+  if (num_posts == posts.length) return;
+  posts_section.replaceChildren([]);
+  num_posts =posts.length;
+  for (var i=0;i < posts.length; i++){
+    let post = document.createElement("p")
+    post.innerText = posts[i].art
+    posts_section.appendChild(post)
+  }
+}
+function load() {
+  let post_button = document.getElementById("post");
+  post_button.onclick = post;
+  load_posts()
+  setInterval(load_posts,3000)
+}
 
-  button.setAttribute("disabled", true);
-
-  // Interact with foo actor, calling the greet method
-  const greeting = await five.greet(name);
-
-  button.removeAttribute("disabled");
-
-  document.getElementById("greeting").innerText = greeting;
-
-  return false;
-});
+window.onload = load

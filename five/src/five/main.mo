@@ -6,6 +6,7 @@ actor{
     public type Message = {
         art:Text;
         time:Int;
+        author:Text;
     };
 
     public type Microblog = actor {
@@ -14,6 +15,8 @@ actor{
         post: shared (Text) -> async(); //发布新消息
         posts: shared query()->async [Message];//返回所有发布的消息
         timeline : shared ()->async [Message];//返回所有关注对象发布的消息
+        set_name : shared (Text) -> async();
+        get_name : shared (Text) -> async();
     };
 
     var followed:List.List<Principal> = List.nil();
@@ -22,7 +25,7 @@ actor{
         followed:=List.push(id,followed)
 
     };
-    public shared func follows():async[Principal]{
+    public shared func follows():async [Principal]{
         List.toArray(followed)
     };
 
@@ -30,16 +33,17 @@ actor{
 
     public shared func post(text:Text):async(){
         let a = {
-            art=text;
-            time=Time.now();
+            art = text;
+            time = Time.now();
+            author = name;
         };
-        messages :=List.push(a,messages)
+        messages := List.push(a,messages)
     };
 
     public shared func posts():async [Message]{
         List.toArray(messages)
     };
-    public shared func timeline():async[Message]{
+    public shared func timeline():async [Message]{
         var all: List.List<Message> =List.nil();
         for (id in Iter.fromList(followed)){
             let canister : Microblog = actor(Principal.toText(id));
@@ -50,6 +54,15 @@ actor{
         };
         List.toArray(all)
     };
+
+    var name: Text = "";
+    public shared func set_name(name1: Text) {
+        name := name1;
+    };
+
+    public shared func get_name():async ?Text {
+       ?name
+    }
 }
 
 

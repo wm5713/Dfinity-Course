@@ -1,12 +1,15 @@
 type Message = 
  record {
    art: text;
+   author: text;
    time: int;
  };
 service : {
   follow: (principal) -> ();
   follows: () -> (vec principal);
+  get_name: () -> (opt text);
   post: (text) -> ();
   posts: () -> (vec Message);
+  set_name: (text) -> () oneway;
   timeline: () -> (vec Message);
 }
