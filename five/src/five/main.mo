@@ -17,6 +17,7 @@ actor{
         timeline : shared ()->async [Message];//返回所有关注对象发布的消息
         set_name : shared (Text) -> async();
         get_name : shared (Text) -> async();
+        test : shared () -> async ();
     };
 
     var followed:List.List<Principal> = List.nil();
